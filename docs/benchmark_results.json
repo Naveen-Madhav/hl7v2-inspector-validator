@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-09T22:41:04.448628+00:00",
+  "generated_at": "2026-10-09T23:08:58.129244+00:00",
   "dataset": "Synthetic only",
   "case_count": 24,
   "passed": 24,
@@ -13,7 +13,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 100.009
+      "duration_ms": 139.311
     },
     {
       "case": "Baseline laboratory order",
@@ -24,7 +24,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.674
+      "duration_ms": 2.723
     },
     {
       "case": "Baseline laboratory result",
@@ -35,7 +35,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 4.156
+      "duration_ms": 4.846
     },
     {
       "case": "Missing header",
@@ -55,7 +55,7 @@
       "passed": true,
       "parsed": false,
       "scoped_coverage": false,
-      "duration_ms": 0.023
+      "duration_ms": 0.037
     },
     {
       "case": "Duplicate delimiter",
@@ -72,7 +72,7 @@
       "passed": true,
       "parsed": false,
       "scoped_coverage": false,
-      "duration_ms": 0.017
+      "duration_ms": 0.02
     },
     {
       "case": "Mismatched structure",
@@ -89,7 +89,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.062
+      "duration_ms": 2.269
     },
     {
       "case": "Missing version",
@@ -106,7 +106,7 @@
       "passed": true,
       "parsed": false,
       "scoped_coverage": false,
-      "duration_ms": 0.028
+      "duration_ms": 0.032
     },
     {
       "case": "Missing control ID",
@@ -123,7 +123,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 1.95
+      "duration_ms": 2.06
     },
     {
       "case": "Invalid processing ID",
@@ -140,7 +140,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.447
+      "duration_ms": 2.127
     },
     {
       "case": "Missing visit",
@@ -178,7 +178,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.322
+      "duration_ms": 2.408
     },
     {
       "case": "Empty patient class",
@@ -195,7 +195,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 1.972
+      "duration_ms": 2.039
     },
     {
       "case": "Missing patient identifier",
@@ -212,7 +212,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.494
+      "duration_ms": 3.354
     },
     {
       "case": "Empty patient name",
@@ -229,7 +229,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.029
+      "duration_ms": 2.322
     },
     {
       "case": "Impossible event date",
@@ -246,7 +246,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.124
+      "duration_ms": 2.164
     },
     {
       "case": "Missing laboratory service",
@@ -263,7 +263,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.172
+      "duration_ms": 2.275
     },
     {
       "case": "Text declared as numeric",
@@ -280,7 +280,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 3.005
+      "duration_ms": 2.773
     },
     {
       "case": "Final observation without value",
@@ -297,7 +297,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 3.111
+      "duration_ms": 3.225
     },
     {
       "case": "Reduced date precision",
@@ -308,7 +308,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.13
+      "duration_ms": 2.247
     },
     {
       "case": "Fraction and timezone",
@@ -319,7 +319,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.474
+      "duration_ms": 3.216
     },
     {
       "case": "Unicode single-component name",
@@ -330,7 +330,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.76
+      "duration_ms": 2.973
     },
     {
       "case": "Repeated laboratory orders",
@@ -341,7 +341,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 3.178
+      "duration_ms": 3.115
     },
     {
       "case": "Custom delimiters",
@@ -352,7 +352,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 3.902
+      "duration_ms": 2.148
     },
     {
       "case": "Explicit null optional field",
@@ -363,7 +363,7 @@
       "passed": true,
       "parsed": true,
       "scoped_coverage": true,
-      "duration_ms": 2.253
+      "duration_ms": 2.196
     }
   ]
 }
