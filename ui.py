@@ -77,9 +77,19 @@ def inspect_view(inspection: Inspection) -> None:
         st.json({segment.label: segment_tree(segment, inspection.encoding)}, expanded=2)
 
 
-def validation_view(report: ValidationReport | None) -> None:
+def validation_view(inspection: Inspection, report: ValidationReport | None) -> None:
     st.subheader("Validation report")
-    st.caption("Selected checks for admission and patient laboratory workflows in HL7 v2.5.1.")
+    introductions: dict[tuple[str, ...], str] = {
+        ("ADT", "A01"): "Selected checks for ADT-A01 admission messages in HL7 v2.5.1.",
+        ("ORM", "O01"): "Selected checks for ORM-O01 patient laboratory orders in HL7 v2.5.1.",
+        ("ORU", "R01"): "Selected checks for ORU-R01 patient laboratory results in HL7 v2.5.1.",
+    }
+    st.caption(
+        introductions.get(
+            inspection.message_type[:2],
+            "Coverage follows the active message. Supported profiles are ADT-A01, ORM-O01, and ORU-R01 in HL7 v2.5.1.",
+        )
+    )
     if not report:
         st.info("Run validation on the active message to see issues and coverage.")
         return
@@ -103,10 +113,15 @@ def validation_view(report: ValidationReport | None) -> None:
         for note in report.coverage_notes:
             st.text("• " + note)
         st.caption(
-            "Scope is limited even when all selected checks run: no clinical, terminology, transport, or complete standard conformance certification."
+            "Scope is limited even when all selected checks run: no clinical interpretation, terminology services, transport checks, or full standard-conformance certification."
         )
     left, right = st.columns([1, 2])
-    severity = left.selectbox("Severity", ["All", "Error", "Warning"], key="severity")
+    severity = left.selectbox(
+        "Severity",
+        ["All", "Error", "Warning"],
+        format_func=lambda value: {"Error": "Errors", "Warning": "Warnings"}.get(value, value),
+        key="severity",
+    )
     query = right.text_input(
         "Find an issue", placeholder="Rule, location, or explanation", key="issue_query"
     )
@@ -126,7 +141,7 @@ def validation_view(report: ValidationReport | None) -> None:
         for issue in issues:
             badge = "badge-error" if issue.severity == "Error" else "badge-warning"
             st.html(
-                f'<article class="issue"><div class="issue-header"><span class="badge {badge}">{issue.severity}</span>'
+                f'<article class="issue"><div class="issue-header"><span class="badge {badge}">{issue.severity}s</span>'
                 f'<span class="issue-location">{escape(issue.location)}</span></div>'
                 f'<p>{escape(issue.explanation)}</p><p class="correction"><strong>Next step:</strong> {escape(issue.correction)}</p>'
                 f'<div class="issue-meta">{escape(issue.rule)} · {escape(issue.basis)}</div></article>'

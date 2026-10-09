@@ -1,6 +1,6 @@
 # Validation rules and coverage
 
-Definition: **HL7V2-IV-1.0**. This validator supports HL7 v2.5.1 admission and patient laboratory scenarios. It does not certify complete HL7 conformance or clinical correctness.
+Definition: **HL7v2-IV-1.0**. This validator supports HL7 v2.5.1 admission and patient laboratory scenarios. It does not certify complete HL7 conformance or clinical correctness.
 
 The profiles expect these core sequences:
 

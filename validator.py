@@ -10,7 +10,7 @@ from datetime import UTC, datetime
 
 from parser import Inspection, Segment, usable
 
-PROFILE_VERSION = "HL7V2-IV-1.0"
+PROFILE_VERSION = "HL7v2-IV-1.0"
 PROFILES = {
     ("ADT", "A01"): ("ADT_A01", ("MSH", "EVN", "PID", "PV1")),
     ("ORM", "O01"): ("ORM_O01", ("MSH", "PID", "ORC", "OBR")),

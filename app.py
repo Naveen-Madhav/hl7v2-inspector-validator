@@ -96,7 +96,7 @@ view = st.segmented_control(
 )
 
 type_label = " / ".join(inspection.message_type[:2]) or "No message type"
-version_label = "HL7 " + (inspection.version or "version not declared")
+version_label = "HL7v2 · " + (inspection.version or "version not declared")
 st.html(
     f'<div class="status-line"><span class="badge badge-teal">{escape(version_label)}</span>'
     f'<span class="badge">{escape(type_label)}</span><span class="badge">{escape(st.session_state.source)}</span></div>'
@@ -143,7 +143,8 @@ if view == "Message":
                 key=f"upload_{st.session_state.upload_epoch}",
                 on_change=upload_message,
             )
-            st.caption("UTF-8 text · one message · maximum 5 MB")
+            st.caption("5 MB per file • HL7, TXT")
+            st.caption("UTF-8 text · one message")
             if st.session_state.get("upload_error"):
                 st.error(st.session_state.upload_error)
     with right:
@@ -172,11 +173,11 @@ if view == "Message":
 elif view == "Inspect":
     inspect_view(inspection)
 elif view == "Validate":
-    validation_view(st.session_state.get("report"))
+    validation_view(inspection, st.session_state.get("report"))
 else:
     guide_view()
 
 st.html(
-    '<footer class="footnote">Selected HL7 v2.5.1 checks · '
+    '<footer class="footnote">Selected HL7v2 checks · version 2.5.1 · '
     "synthetic samples · no clinical interpretation</footer>"
 )

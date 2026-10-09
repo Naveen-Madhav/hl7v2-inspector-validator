@@ -46,6 +46,8 @@
 /* Native widgets retain keyboard behavior, labels, and focus outlines. */
 .st-key-editor textarea { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; line-height: 1.65; background: var(--surface); color: var(--ink); }
 .st-key-navigation { padding: .25rem 0; border-top: 1px solid var(--line); }
+/* Replace Streamlit's compressed size/type caption with the accessible caption below the widget. */
+.st-key-upload_panel [data-testid="stFileUploaderDropzoneInstructions"] { display: none; }
 @media (max-width: 640px) {
   .stMainBlockContainer { padding: 3.5rem 1rem 2rem; }
   .brand { gap: .75rem; }

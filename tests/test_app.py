@@ -66,3 +66,20 @@ def test_malformed_input_is_explained() -> None:
     click_label(app, "Run validation")
     assert app.error and not app.exception
     assert not app.session_state["report"].complete
+
+
+def test_validation_context_and_plural_severity_labels() -> None:
+    app = start()
+    app.selectbox(key="sample_index").set_value(2).run()
+    click_label(app, "Load synthetic sample")
+    click_label(app, "Run validation")
+    assert any("ORU-R01 patient laboratory results" in caption.value for caption in app.caption)
+    assert not any("admission" in caption.value for caption in app.caption)
+    assert app.selectbox(key="severity").options == ["All", "Errors", "Warnings"]
+    app.selectbox(key="severity").set_value("Warning").run()
+    click_label(app, "Reset workspace")
+    app.selectbox(key="sample_index").set_value(0).run()
+    click_label(app, "Load synthetic sample")
+    click_label(app, "Run validation")
+    assert any("ADT-A01 admission messages" in caption.value for caption in app.caption)
+    assert not app.exception
