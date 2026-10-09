@@ -2,6 +2,8 @@
 
 A focused tool for healthcare integration engineers, interface analysts, and learners practicing HL7v2 troubleshooting. Paste or upload a message, inspect its structure, and read validation issues with locations and practical next steps.
 
+Try the [live app](https://hl7v2-inspector-validator.streamlit.app/).
+
 The inspector preserves raw field positions alongside hl7apy parsing. The validator checks three bounded HL7 v2.5.1 profiles and exports structured reports as JSON or CSV.
 
 ![Validation workspace](assets/validation-workspace.jpg)
@@ -100,4 +102,4 @@ assets/                 README screenshot
 
 ## Deployment
 
-Deploy the `main` branch and `app.py` using [Streamlit Community Cloud](https://share.streamlit.io/). Select Python 3.12 in advanced settings. `requirements.txt` contains the runtime dependencies; development requirements are not needed on the server. No secrets are required. [Official deployment instructions](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy) describe the account and GitHub connection steps. A public app link will be added after deployment and verification.
+Deploy the `main` branch and `app.py` using [Streamlit Community Cloud](https://share.streamlit.io/). Select Python 3.12 in advanced settings. `requirements.txt` contains the runtime dependencies; development requirements are not needed on the server. No secrets are required. [Official deployment instructions](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy) describe the account and GitHub connection steps. The public deployment was verified on October 9, 2026 using synthetic inputs, including uploads, inspection, validation, and JSON/CSV downloads.
