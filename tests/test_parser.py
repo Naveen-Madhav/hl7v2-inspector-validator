@@ -33,7 +33,7 @@ def test_upload_encoding_and_size() -> None:
 
 
 def test_upload_boundary_matches_streamlit_megabytes() -> None:
-    assert MAX_BYTES == 5 * 1024 * 1024
+    assert MAX_BYTES == 5_000_000
     assert len(decode_upload(b"a" * MAX_BYTES)) == MAX_BYTES
     assert len(decode_upload("é".encode() * (MAX_BYTES // 2))) == MAX_BYTES // 2
     assert inspect_message("a" * (MAX_BYTES + 1)).input_error == (

@@ -14,7 +14,7 @@ from hl7apy.consts import VALIDATION_LEVEL
 from hl7apy.exceptions import HL7apyException
 from hl7apy.parser import parse_message
 
-MAX_BYTES = 5 * 1024 * 1024
+MAX_BYTES = 5_000_000
 MAX_SEGMENTS = 1_000
 MAX_TREE_NODES = 20_000
 
