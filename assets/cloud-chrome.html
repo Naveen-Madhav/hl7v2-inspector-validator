@@ -1,0 +1,38 @@
+<script>
+(() => {
+  // Community Cloud places the app in a same-origin wrapper. Local and other hosts are untouched.
+  if (!location.hostname.endsWith(".streamlit.app") || window.parent === window) return;
+  let host;
+  try {
+    if (window.parent.location.origin !== location.origin) return;
+    host = window.parent.document;
+  } catch {
+    return;
+  }
+  const id = "hl7v2-cloud-chrome";
+  if (host.getElementById(id)) return;
+  const style = host.createElement("style");
+  style.id = id;
+  style.textContent = `
+    [class*="_profileContainer_"] { display: none !important; }
+    a[class*="_viewerBadge_"] {
+      right: 16px !important;
+      bottom: 16px !important;
+      border-radius: 8px !important;
+    }
+  `;
+  host.head.appendChild(style);
+  const selector = 'iframe[title="Streamlit Cloud Status"]';
+  host.querySelectorAll(selector).forEach(frame => frame.remove());
+  // Also remove a status embed inserted after the app has loaded.
+  new MutationObserver(records => {
+    for (const record of records) {
+      for (const node of record.addedNodes) {
+        if (node.nodeType !== 1) continue;
+        if (node.matches(selector)) node.remove();
+        else node.querySelectorAll(selector).forEach(frame => frame.remove());
+      }
+    }
+  }).observe(host.body, { childList: true, subtree: true });
+})();
+</script>

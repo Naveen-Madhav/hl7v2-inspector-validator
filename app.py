@@ -17,6 +17,7 @@ SAMPLES = json.loads((ROOT / "samples" / "manifest.json").read_text())
 
 st.set_page_config(page_title="HL7v2 Message Inspector", page_icon="🔎", layout="wide")
 st.html(ROOT / "styles.css")
+st.html(ROOT / "assets" / "cloud-chrome.html", unsafe_allow_javascript=True)
 
 
 def invalidate() -> None:

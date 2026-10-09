@@ -8,7 +8,7 @@
   --warning: #805500;
   --error: #b42318;
 }
-.stMainBlockContainer { max-width: 1440px; padding: 4rem 2rem 3rem; }
+.stMainBlockContainer { max-width: 1440px; padding: 4rem 2rem 6rem; }
 .st-key-sample_panel, .st-key-upload_panel, .st-key-editor_panel,
 .st-key-inspection_panel, .st-key-issues_panel, .st-key-profiles_panel { background: var(--surface); }
 .brand { display: flex; align-items: flex-start; gap: .875rem; padding-bottom: .25rem; }
@@ -49,7 +49,7 @@
 /* Replace Streamlit's compressed size/type caption with the accessible caption below the widget. */
 .st-key-upload_panel [data-testid="stFileUploaderDropzoneInstructions"] { display: none; }
 @media (max-width: 640px) {
-  .stMainBlockContainer { padding: 3.5rem 1rem 2rem; }
+  .stMainBlockContainer { padding: 3.5rem 1rem 6rem; }
   .brand { gap: .75rem; }
   .brand-mark { width: 2.5rem; }
   .brand h1 { font-size: 1.375rem; }
