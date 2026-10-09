@@ -9,3 +9,13 @@ baseFontSize = 16
 baseRadius = "0.5rem"
 borderColor = "#dce1e7"
 
+[server]
+maxUploadSize = 1
+headless = true
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = "none"
