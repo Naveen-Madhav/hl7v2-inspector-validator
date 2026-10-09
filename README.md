@@ -97,7 +97,7 @@ samples/                Six synthetic fixtures and expected outcomes
 tests/                  Parser, validator, and Streamlit workflow checks
 scripts/evaluate.py     Reproducible benchmark runner
 docs/                   Rule sources and evaluation evidence
-assets/                 README screenshot
+assets/                 SVG brand mark and README screenshot
 ```
 
 ## Deployment

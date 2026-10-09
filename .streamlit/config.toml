@@ -1,13 +1,13 @@
 [theme]
 base = "light"
-primaryColor = "#206bc4"
-backgroundColor = "#f4f6fa"
+primaryColor = "#004643"
+backgroundColor = "#F0EDE5"
 secondaryBackgroundColor = "#ffffff"
-textColor = "#182433"
+textColor = "#18302d"
 font = "sans serif"
 baseFontSize = 16
 baseRadius = "0.5rem"
-borderColor = "#dce1e7"
+borderColor = "#d9d7ce"
 
 [server]
 maxUploadSize = 1
