@@ -139,11 +139,11 @@ if view == "Message":
             st.file_uploader(
                 "HL7 or text file",
                 type=["hl7", "txt"],
-                max_upload_size=1,
+                max_upload_size=5,
                 key=f"upload_{st.session_state.upload_epoch}",
                 on_change=upload_message,
             )
-            st.caption("UTF-8 text · one message · maximum 1 MB")
+            st.caption("UTF-8 text · one message · maximum 5 MB")
             if st.session_state.get("upload_error"):
                 st.error(st.session_state.upload_error)
     with right:

@@ -14,7 +14,7 @@ The patient laboratory profiles deliberately require PID and laboratory observat
 
 | Rule | Check | Severity and basis |
 | --- | --- | --- |
-| R01 | One leading MSH; one unframed message within 1 MB, 1,000 segments, and 20,000 separator characters; reject disallowed control characters | Error. Input boundary and header structure |
+| R01 | One leading MSH; one unframed message within 5 MB, 1,000 segments, and 20,000 separator characters; reject disallowed control characters | Error. Input boundary and header structure |
 | R02 | MSH-1 and MSH-2 declare five distinct ASCII punctuation separators | Error. ER7 encoding; bounded v2.5.1 profile |
 | R03 | MSH-9 contains message code, event, and consistent structure | Error. Selected project profile |
 | R04 | MSH-12 declares a version | Error when absent. Versions other than 2.5.1 receive limited coverage |

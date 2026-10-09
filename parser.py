@@ -14,7 +14,7 @@ from hl7apy.consts import VALIDATION_LEVEL
 from hl7apy.exceptions import HL7apyException
 from hl7apy.parser import parse_message
 
-MAX_BYTES = 1_000_000
+MAX_BYTES = 5_000_000
 MAX_SEGMENTS = 1_000
 MAX_TREE_NODES = 20_000
 
@@ -72,7 +72,7 @@ def value_state(value: str) -> str:
 
 def decode_upload(data: bytes) -> str:
     if len(data) > MAX_BYTES:
-        raise ValueError("The file exceeds the 1 MB input limit.")
+        raise ValueError("The file exceeds the 5 MB input limit.")
     try:
         return data.decode("utf-8-sig")
     except UnicodeDecodeError as exc:
@@ -87,7 +87,7 @@ def inspect_message(text: str) -> Inspection:
         result.input_error = "The input contains unsupported Unicode characters."
         return result
     if size > MAX_BYTES:
-        result.input_error = "The message exceeds the 1 MB input limit."
+        result.input_error = "The message exceeds the 5 MB input limit."
         return result
     normalized = text.removeprefix("\ufeff").replace("\r\n", "\r").replace("\n", "\r")
     normalized = normalized.strip("\r")

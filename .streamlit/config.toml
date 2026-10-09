@@ -10,7 +10,7 @@ baseRadius = "0.5rem"
 borderColor = "#d9d7ce"
 
 [server]
-maxUploadSize = 1
+maxUploadSize = 5
 headless = true
 
 [browser]

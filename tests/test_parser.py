@@ -28,7 +28,7 @@ def test_upload_encoding_and_size() -> None:
     assert decode_upload(b"\xef\xbb\xbfMSH") == "MSH"
     with pytest.raises(ValueError, match="UTF-8"):
         decode_upload(b"\xff")
-    with pytest.raises(ValueError, match="1 MB"):
+    with pytest.raises(ValueError, match="5 MB"):
         decode_upload(b"a" * (MAX_BYTES + 1))
 
 

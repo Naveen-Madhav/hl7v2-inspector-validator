@@ -82,7 +82,7 @@ The [evaluation](docs/evaluation.md), [observed results](docs/benchmark_results.
 
 The tool does not certify full HL7 conformance, interpret clinical results, validate terminology membership, or replace a receiving system's specification. Validation covers selected HL7 v2.5.1 checks for the profiles above. Unsupported elements receive coverage notices; a clean limited report is not presented as a pass.
 
-Input limits are 1 MB, 1,000 segments, and 20,000 separator characters. One unframed ER7 message is accepted at a time. Batch and MLLP framing are unsupported. Escapes remain encoded, and validation does not inspect every HL7 field.
+Input limits are 5 MB, 1,000 segments, and 20,000 separator characters. One unframed ER7 message is accepted at a time. Batch and MLLP framing are unsupported. Escapes remain encoded, and validation does not inspect every HL7 field.
 
 Use synthetic or de-identified data. Streamlit processes input on its server. The application holds it in the active session and does not deliberately persist or log messages or use a shared message cache. Reset clears the active workspace and report. Reports omit the raw message; locations and coverage notes still describe the input, so review exports before sharing. Hosting providers have their own infrastructure and retention policies.
 

@@ -191,7 +191,7 @@ def guide_view() -> None:
             "The laboratory profiles narrow the use case; their required segments are not universal requirements for every ORM or ORU message. OBX value checks cover NM, ST, TX, CE, and CWE. Other types and additional segments remain visible with limited-coverage notices."
         )
         st.write(
-            "One UTF-8, unframed ER7 message per input. Limits: 1 MB, 1,000 segments, and 20,000 separator characters. Escape sequences are preserved rather than decoded. Dates are checked only in documented fields."
+            "One UTF-8, unframed ER7 message per input. Limits: 5 MB, 1,000 segments, and 20,000 separator characters. Escape sequences are preserved rather than decoded. Dates are checked only in documented fields."
         )
         st.write(
             "Use synthetic or de-identified data. Input is processed on the server, held in the current session, and not deliberately saved or logged by this application. Reset clears the workspace; closing the session ends access to it."
