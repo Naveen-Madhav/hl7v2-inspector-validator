@@ -1,0 +1,58 @@
+[
+  {
+    "id": "adt_a01_baseline",
+    "file": "adt_a01_baseline.hl7",
+    "label": "ADT-A01 \u00b7 Baseline",
+    "synthetic": true,
+    "description": "Synthetic admission with a patient identifier and visit.",
+    "expected_rules": []
+  },
+  {
+    "id": "orm_o01_baseline",
+    "file": "orm_o01_baseline.hl7",
+    "label": "ORM-O01 \u00b7 Baseline",
+    "synthetic": true,
+    "description": "Synthetic patient laboratory order with matching order identifiers.",
+    "expected_rules": []
+  },
+  {
+    "id": "oru_r01_baseline",
+    "file": "oru_r01_baseline.hl7",
+    "label": "ORU-R01 \u00b7 Baseline",
+    "synthetic": true,
+    "description": "Synthetic laboratory report with numeric and text observations.",
+    "expected_rules": []
+  },
+  {
+    "id": "adt_a01_broken",
+    "file": "adt_a01_broken.hl7",
+    "label": "ADT-A01 \u00b7 Intentional defects",
+    "synthetic": true,
+    "description": "Synthetic admission with a missing identifier and impossible event date.",
+    "expected_rules": [
+      "R10",
+      "R12"
+    ]
+  },
+  {
+    "id": "orm_o01_broken",
+    "file": "orm_o01_broken.hl7",
+    "label": "ORM-O01 \u00b7 Intentional defects",
+    "synthetic": true,
+    "description": "Synthetic laboratory order with OBR placed before ORC.",
+    "expected_rules": [
+      "R07",
+      "R08"
+    ]
+  },
+  {
+    "id": "oru_r01_broken",
+    "file": "oru_r01_broken.hl7",
+    "label": "ORU-R01 \u00b7 Intentional defects",
+    "synthetic": true,
+    "description": "Synthetic laboratory report declaring a text value as numeric.",
+    "expected_rules": [
+      "R14"
+    ]
+  }
+]
