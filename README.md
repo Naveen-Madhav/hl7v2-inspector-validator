@@ -6,7 +6,9 @@ Try the [live app](https://hl7v2-inspector-validator.streamlit.app/).
 
 The inspector preserves raw field positions alongside hl7apy parsing. The validator checks three bounded HL7 v2.5.1 profiles and exports structured reports as JSON or CSV.
 
-![Validation workspace](assets/validation-workspace.jpg)
+<p align="center">
+  <img src="assets/validation-workspace.png" alt="HL7v2 message and validation workspace" width="100%">
+</p>
 
 ## Run locally
 
@@ -74,7 +76,7 @@ mypy parser.py validator.py app.py ui.py
 python scripts/evaluate.py
 ```
 
-The suite contains 71 tests, including four Streamlit AppTest workflows. The expected-versus-observed benchmark contains 24 authored cases: three baselines, one defect per rule family, and six legitimate edge cases. Expectations are specified separately from validator output. All 24 cases matched their expectations in the recorded run.
+The suite contains 73 tests, including five Streamlit AppTest workflows. The expected-versus-observed benchmark contains 24 authored cases: three baselines, one defect per rule family, and six legitimate edge cases. Expectations are specified separately from validator output. All 24 cases matched their expectations in the recorded run.
 
 The [evaluation](docs/evaluation.md), [observed results](docs/benchmark_results.json), and [case definitions](tests/cases.py) make the evidence reproducible. These results describe controlled synthetic inputs; they do not establish accuracy on hospital traffic or learning gains.
 
@@ -103,3 +105,9 @@ assets/                 SVG brand mark and README screenshot
 ## Deployment
 
 Deploy the `main` branch and `app.py` using [Streamlit Community Cloud](https://share.streamlit.io/). Select Python 3.12 in advanced settings. `requirements.txt` contains the runtime dependencies; development requirements are not needed on the server. No secrets are required. [Official deployment instructions](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy) describe the account and GitHub connection steps. The public deployment was verified on October 9, 2026 using synthetic inputs, including uploads, inspection, validation, and JSON/CSV downloads.
+
+## AI assistance disclosure
+
+I defined the project concept, requirements, and validation rule priorities based on my healthcare integration experience. AI coding assistants helped with planning, design exploration, implementation, debugging, testing, and documentation. I take responsibility for reviewing the project, checking its claims, and deciding what to submit.
+
+This project is [MIT licensed](LICENSE).
