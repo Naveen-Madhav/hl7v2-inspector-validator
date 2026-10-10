@@ -1,18 +1,61 @@
-# HL7v2 Inspector and Validator
+# HL7v2 Message Inspector and Validator
 
-A focused tool for healthcare integration engineers, interface analysts, and learners practicing HL7v2 troubleshooting. Paste or upload a message, inspect its structure, and read validation issues with locations and practical next steps.
+Inspect HL7v2 messages and diagnose interface defects with field-level explanations.
 
-Try the [live app](https://hl7v2-inspector-validator.streamlit.app/).
+**[Live Demo](https://hl7v2-inspector-validator.streamlit.app/)**
 
-The inspector preserves raw field positions alongside hl7apy parsing. The validator checks three bounded HL7 v2.5.1 profiles and exports structured reports as JSON or CSV.
+An HL7v2 message can parse successfully and still fail in a receiving system. A missing patient identifier, an impossible timestamp, a numeric result containing text, or misplaced order segments can interrupt an interface workflow. This project makes those defects visible and explains what to check next.
+
+Built for healthcare integration engineers, interface analysts, and learners practicing interoperability troubleshooting. The repository includes runnable source, documented rules, synthetic examples, and reproducible evaluation evidence.
 
 <p align="center">
-  <img src="assets/validation-workspace.png" alt="HL7v2 message and validation workspace" width="100%">
+  <img src="assets/validation-workspace.png" alt="HL7v2 message inspection and validation workspace" width="100%">
 </p>
 
-## Run locally
+## What it does
 
-Use Python 3.12. From this repository folder:
+- **Message:** paste one message, upload a UTF-8 .hl7 or .txt file, or load a synthetic sample.
+- **Inspect:** examine the field table and expandable segment, field, repetition, component, and subcomponent hierarchy. Raw positions, empty fields, and explicit-null values are preserved.
+- **Validate:** run 15 rule families covering selected header, patient, timestamp, order, and observation checks. Issues include severity, location, explanation, and a suggested next step.
+- **Guide:** read plain-language explanations of common interface defects and profile requirements.
+- **Reports:** download the complete validation report as JSON or CSV without the raw message. Display filters do not remove issues from exports.
+
+Editing the message invalidates its previous report. Reset workspace clears input and results.
+
+## Supported profiles
+
+Validation covers three bounded HL7 v2.5.1 profiles:
+
+| Profile | Workflow | Required core sequence |
+| --- | --- | --- |
+| ADT-A01 | Admission | MSH, EVN, PID, PV1 |
+| ORM-O01 | Patient laboratory order | MSH, PID, ORC, OBR |
+| ORU-R01 | Patient laboratory result | MSH, PID, OBR, OBX |
+
+Repeated laboratory order and observation groups are supported. These laboratory requirements are project profile decisions, not universal ORM or ORU requirements. The [rule definitions](docs/rules.md) distinguish standard-derived checks, profile requirements, and advisory warnings.
+
+## Validation results
+
+| Check | Recorded result |
+| --- | --- |
+| Expected-versus-observed benchmark | **24 of 24 cases matched** |
+| Automated tests | **73 passing**, including five Streamlit AppTest workflows |
+| Ruff lint and formatting | Clean |
+| mypy | Clean for parser.py, validator.py, app.py, and ui.py |
+
+The benchmark contains three baselines, 15 defect cases, and six legitimate edge cases. Expectations are specified separately from validator output. Defect cases check rule sets, principal locations, and severity; clean cases require complete coverage and no issues.
+
+Read the [evaluation](docs/evaluation.md), inspect the [recorded results](docs/benchmark_results.json), or review the [case definitions](tests/cases.py). These results describe controlled synthetic inputs and do not establish accuracy across hospital traffic or learning gains.
+
+## Tech stack
+
+Python 3.12, Streamlit, hl7apy, and pytest. Ruff and mypy provide linting, formatting, and type checks. Runtime dependencies are pinned to Streamlit 1.65.0 and hl7apy 1.3.5.
+
+The parser combines hl7apy's tolerant parsing with a delimiter-aware raw view. Parsing, validation rules, and presentation are separated so that message behavior can be tested independently of the interface. No database, API key, paid account, or clinical connection is required.
+
+## Quickstart
+
+From this repository folder, using Python 3.12:
 
 ```sh
 python -m venv .venv
@@ -21,51 +64,9 @@ python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
-On Windows, activate with `.venv\Scripts\activate`. Runtime dependencies are pinned to Streamlit 1.65.0 and hl7apy 1.3.5. No API key, database, paid account, or clinical connection is needed.
+On Windows, activate with `.venv\Scripts\activate`.
 
-## Supported profiles
-
-| Profile | Scenario | Core segment sequence |
-| --- | --- | --- |
-| ADT-A01 | Admission | MSH, EVN, PID, PV1 |
-| ORM-O01 | Patient laboratory order | MSH, PID, ORC, OBR |
-| ORU-R01 | Patient laboratory result | MSH, PID, OBR, OBX |
-
-These are selected checks for specific admission and laboratory scenarios, not complete message specifications. Repeated order and observation groups are supported. Laboratory requirements are not universal ORM or ORU requirements. Other versions and message types remain inspectable where possible, with explicit validation coverage notices.
-
-## Synthetic sample library
-
-All six bundled messages are **synthetic**. There are no real patient records.
-
-| Sample | Intended behavior |
-| --- | --- |
-| ADT admission baseline | Populated patient identifiers, name, event time, and visit |
-| ADT with defects | Missing PID-3 and an impossible event date |
-| ORM laboratory order baseline | Patient and order identifiers in the expected sequence |
-| ORM with defects | OBR placed before its ORC order-control segment |
-| ORU laboratory result baseline | Numeric and text observations |
-| ORU with defects | Text supplied for a numeric observation |
-
-The [sample manifest](samples/manifest.json) declares the expected rule outcomes. Load a sample from the Message view or upload one UTF-8 ER7 file. Editing the input invalidates the previous validation report. Reset clears the active workspace.
-
-## Rule coverage
-
-Fifteen rule families cover the following checks:
-
-| Rules | Coverage |
-| --- | --- |
-| R01-R06 | Header placement, delimiters, message identity, version, and processing metadata |
-| R07-R08 | Required core segments and segment-group order |
-| R09-R11 | Required field values, patient identifiers, and names |
-| R12 | Selected date and time fields |
-| R13 | Laboratory order identifiers |
-| R14-R15 | Observation datatype/value consistency and result status |
-
-[Rule definitions and sources](docs/rules.md) distinguish standard-derived checks, profile requirements, and advisory warnings. Datatype checks cover selected NM, ST, TX, CE, and CWE observations. Date/time checks accept reduced precision, fractional seconds, and numeric timezones.
-
-Inspection uses hl7apy's tolerant parser without group construction, plus a delimiter-aware raw view preserving empty, explicit-null, repeated, and trailing fields. Field names and datatypes come from hl7apy's version definitions. The raw view remains available after recoverable parsing failures. Parsing success is separate from validation success.
-
-## Tests and evaluation
+To run the checks and benchmark:
 
 ```sh
 python -m pip install -r requirements-dev.txt
@@ -76,38 +77,46 @@ mypy parser.py validator.py app.py ui.py
 python scripts/evaluate.py
 ```
 
-The suite contains 73 tests, including five Streamlit AppTest workflows. The expected-versus-observed benchmark contains 24 authored cases: three baselines, one defect per rule family, and six legitimate edge cases. Expectations are specified separately from validator output. All 24 cases matched their expectations in the recorded run.
+## Synthetic data
 
-The [evaluation](docs/evaluation.md), [observed results](docs/benchmark_results.json), and [case definitions](tests/cases.py) make the evidence reproducible. These results describe controlled synthetic inputs; they do not establish accuracy on hospital traffic or learning gains.
+**All bundled messages and benchmark inputs are synthetic. No patient data or employer interface logs are included.**
 
-## Limitations and data handling
+The six-message library contains a baseline and an intentionally broken example for each profile. The broken ADT demonstrates a missing identifier and impossible date; the broken ORM demonstrates invalid order grouping; the broken ORU supplies text for a numeric observation. The [sample manifest](samples/manifest.json) declares the expected rule outcomes.
 
-The tool does not certify full HL7 conformance, interpret clinical results, validate terminology membership, or replace a receiving system's specification. Validation covers selected HL7 v2.5.1 checks for the profiles above. Unsupported elements receive coverage notices; a clean limited report is not presented as a pass.
+## Scope and limitations
 
-Input limits are 5 MB, 1,000 segments, and 20,000 separator characters. One unframed ER7 message is accepted at a time. Batch and MLLP framing are unsupported. Escapes remain encoded, and validation does not inspect every HL7 field.
+This is a troubleshooting and portfolio tool. It does not certify full HL7 conformance, interpret clinical results, validate terminology membership, or replace a receiving system's specification.
 
-Use synthetic or de-identified data. Streamlit processes input on its server. The application holds it in the active session and does not deliberately persist or log messages or use a shared message cache. Reset clears the active workspace and report. Reports omit the raw message; locations and coverage notes still describe the input, so review exports before sharing. Hosting providers have their own infrastructure and retention policies.
+- Input is limited to one unframed ER7 message within 5 MB, 1,000 segments, and 20,000 separator characters. Batch and MLLP framing are unsupported.
+- Selected NM, ST, TX, CE, and CWE values are checked. Other versions, message types, additional segments, and unimplemented datatypes receive explicit coverage notices where inspection is possible.
+- Date/time validation covers documented fields and permits legitimate reduced precision. Escapes remain encoded, and not every HL7 field is validated.
+- A clean report means only that the implemented checks found no issues within their stated coverage. The small authored benchmark benefits from independent review and unseen test messages.
+- This application processes HL7v2 messages. It does not implement a FHIR API or an interface transport engine.
+
+Use synthetic or de-identified input. Streamlit processes it on its server; the application holds it in the active session and does not deliberately persist or log messages or use a shared message cache. Reports omit the raw message, but locations and coverage notes can describe input. Review exports before sharing. Hosting providers have their own infrastructure and retention policies.
 
 ## Repository structure
 
 ```text
 app.py                  Streamlit session and navigation
-parser.py               hl7apy integration and preserved raw inspection
+parser.py               hl7apy integration and raw inspection
 validator.py            Profiles, rules, and report serialization
-ui.py / styles.css      Presentation helpers and visual styling
-samples/                Six synthetic fixtures and expected outcomes
-tests/                  Parser, validator, and Streamlit workflow checks
+ui.py / styles.css      Presentation helpers and styling
+samples/                Six synthetic messages and manifest
+tests/                  Parser, validator, and UI workflow tests
 scripts/evaluate.py     Reproducible benchmark runner
-docs/                   Rule sources and evaluation evidence
-assets/                 SVG brand mark and README screenshot
+docs/                   Rule definitions and evaluation evidence
+assets/                 Brand mark and workspace screenshot
 ```
 
 ## Deployment
 
-Deploy the `main` branch and `app.py` using [Streamlit Community Cloud](https://share.streamlit.io/). Select Python 3.12 in advanced settings. `requirements.txt` contains the runtime dependencies; development requirements are not needed on the server. No secrets are required. [Official deployment instructions](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy) describe the account and GitHub connection steps. The public deployment was verified on October 9, 2026 using synthetic inputs, including uploads, inspection, validation, and JSON/CSV downloads.
+Deploy the main branch and app.py using [Streamlit Community Cloud](https://share.streamlit.io/). Select Python 3.12 in advanced settings and install requirements.txt. No secrets are required. See the [official deployment instructions](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy).
 
 ## AI assistance disclosure
 
 I defined the project concept, requirements, and validation rule priorities based on my healthcare integration experience. AI coding assistants helped with planning, design exploration, implementation, debugging, testing, and documentation. I take responsibility for reviewing the project, checking its claims, and deciding what to submit.
+
+**Author:** [Naveen Madhav](https://www.linkedin.com/in/naveenmadhav/)
 
 This project is [MIT licensed](LICENSE).

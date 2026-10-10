@@ -96,8 +96,10 @@ view = st.segmented_control(
     wrap=True,
 )
 
-type_label = " / ".join(inspection.message_type[:2]) or "No message type"
-version_label = "HL7v2 · " + (inspection.version or "version not declared")
+type_label = "-".join(inspection.message_type[:2]) or "No message type"
+version_label = (
+    "HL7 v" + inspection.version if inspection.version else "HL7v2 · version not declared"
+)
 st.html(
     f'<div class="status-line"><span class="badge badge-teal">{escape(version_label)}</span>'
     f'<span class="badge">{escape(type_label)}</span><span class="badge">{escape(st.session_state.source)}</span></div>'
@@ -179,6 +181,6 @@ else:
     guide_view()
 
 st.html(
-    '<footer class="footnote">Selected HL7v2 checks · version 2.5.1 · '
+    '<footer class="footnote">Selected checks · HL7 v2.5.1 · '
     "synthetic samples · no clinical interpretation</footer>"
 )
