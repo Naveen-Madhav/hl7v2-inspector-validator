@@ -12,6 +12,14 @@ Built for healthcare integration engineers, interface analysts, and learners pra
   <img src="assets/validation-workspace.png" alt="HL7v2 message inspection and validation workspace" width="100%">
 </p>
 
+## Sample output
+
+Test-run excerpt from `python -m pytest -q` using Python 3.11.
+
+```text
+73 passed in 2.24s
+```
+
 ## What it does
 
 - **Message:** paste one message, upload a UTF-8 .hl7 or .txt file, or load a synthetic sample.
@@ -113,10 +121,8 @@ assets/                 Brand mark and workspace screenshot
 
 Deploy the main branch and app.py using [Streamlit Community Cloud](https://share.streamlit.io/). Select Python 3.12 in advanced settings and install requirements.txt. No secrets are required. See the [official deployment instructions](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy).
 
-## AI assistance disclosure
-
-I defined the project concept, requirements, and validation rule priorities based on my healthcare integration experience. AI coding assistants helped with planning, design exploration, implementation, debugging, testing, and documentation. I take responsibility for reviewing the project, checking its claims, and deciding what to submit.
-
 **Author:** [Naveen Madhav](https://www.linkedin.com/in/naveenmadhav/)
 
 This project is [MIT licensed](LICENSE).
+
+**AI assistance:** I defined the project concept, requirements, and validation rule priorities based on my healthcare integration experience. AI coding assistants helped with planning, design exploration, implementation, debugging, testing, and documentation. I take responsibility for reviewing the project, checking its claims, and deciding what to submit.
