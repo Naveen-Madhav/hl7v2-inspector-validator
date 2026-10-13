@@ -20,6 +20,25 @@
       bottom: 16px !important;
       border-radius: 8px !important;
     }
+    @media (max-width: 640px) {
+      [class*="_stateContainer_"] {
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+      }
+      iframe[title="streamlitApp"] {
+        flex: 1 1 0 !important;
+        min-height: 0 !important;
+        height: 0 !important;
+      }
+      a[class*="_viewerBadge_"] {
+        position: static !important;
+        flex-shrink: 0 !important;
+        align-self: flex-end !important;
+        margin: 8px 16px !important;
+      }
+    }
   `;
   host.head.appendChild(style);
   const selector = 'iframe[title="Streamlit Cloud Status"]';
